@@ -1,0 +1,33 @@
+{
+  "name": "pagoda",
+  "version": "0.0.1",
+  "description": "A possible recreation of Yongning Temple Pagoda based off known primary sources.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --progress"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kimcix/Pagoda.git"
+  },
+  "keywords": [
+    "3D"
+  ],
+  "author": "Alex Kim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kimcix/Pagoda/issues"
+  },
+  "homepage": "https://github.com/kimcix/Pagoda#readme",
+  "devDependencies": {
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "webpack": "^5.3.2",
+    "webpack-cli": "^4.1.0"
+  },
+  "dependencies": {
+    "three": "^0.122.0"
+  }
+}
