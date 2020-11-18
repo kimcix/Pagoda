@@ -3,7 +3,7 @@ import * as THREE from 'three/build/three.module';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-function SceneManger(canvas) {
+export default function SceneManger(canvas) {
   // Init renderer
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
@@ -29,33 +29,6 @@ function SceneManger(canvas) {
 
   controls.maxPolarAngle = (2 * Math.PI) / 3; // Limit to horizon
 
-  // Instantiate a loader
-  const loader = new GLTFLoader();
-
-  // Load a glTF resource
-  loader.load(
-    // resource URL
-    '../temple.gltf',
-    // called when the resource is loaded
-    (gltf) => {
-      scene.add(gltf.scene);
-      /*
-            gltf.animations; // Array<THREE.AnimationClip>
-            gltf.scene; // THREE.Group
-            gltf.scenes; // Array<THREE.Group>
-            gltf.cameras; // Array<THREE.Camera>
-            gltf.asset; // Object
-            */
-    },
-    // called while loading is progressing
-    (xhr) => {
-      console.log(`${(xhr.loaded / xhr.total) * 100}% loaded`);
-    },
-    // called when loading has errors
-    (error) => {
-      console.log('An error happened');
-    },
-  );
   // world
   const geometry = new THREE.BoxGeometry();
   const material = new THREE.MeshStandardMaterial({ color: 0x86a2cf });
@@ -82,5 +55,3 @@ function SceneManger(canvas) {
     renderer.render(scene, camera);
   };
 };
-
-export default SceneManger;
