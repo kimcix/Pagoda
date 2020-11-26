@@ -1,7 +1,11 @@
-import * as SceneManager from './SceneManager';
+import SceneManager from './SceneManager';
 
 const canvas = document.getElementById('canvas');
-const sceneManager = new SceneManager(canvas);
+const scene = new SceneManager(canvas);
+
+scene.onWindowResize()
+scene.update()
+
 
 bindEventListeners();
 render();
@@ -18,10 +22,10 @@ function resizeCanvas() {
 	canvas.width  = canvas.offsetWidth;
 	canvas.height = canvas.offsetHeight;
     
-    sceneManager.onWindowResize();
+    scene.onWindowResize();
 }
 
 function render() {
     requestAnimationFrame(render);
-    sceneManager.update();
+    scene.update();
 }
