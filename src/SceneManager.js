@@ -1,4 +1,6 @@
-import * as THREE from 'three/build/three.module';
+import {
+  WebGLRenderer, Scene, Color, FogExp2, AxesHelper, PerspectiveCamera, HemisphereLight,
+} from 'three';
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
@@ -6,20 +8,21 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 export default class SceneManager {
   constructor(canvas) {
     // Init Render
-    this.renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
+    this.renderer = new WebGLRenderer({ antialias: true, canvas });
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
 
-    this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0xcccccc);
-    this.scene.fog = new THREE.FogExp2(0xcccccc, 0.002);
-    this.scene.add(THREE.AxisHelper(500));
+    document.body.appendChild(this.renderer.domElement);
 
-    this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+    this.scene = new Scene();
+    this.scene.background = new Color(0xcccccc);
+    this.scene.fog = new FogExp2(0xcccccc, 0.002);
+    this.scene.add(new AxesHelper(500));
+
+    this.camera = new PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
     this.camera.position.set(400, 200, 0);
 
-    this.controls = new OrbitControls(camera, renderer.domElement);
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.05;
 
@@ -54,25 +57,18 @@ export default class SceneManager {
       },
       // called when loading has errors
       (error) => {
-        console.log('An error happened');
+        console.log(`Error: ${error}`);
       },
     );
-    // world
-    this.geometry = new THREE.BoxGeometry();
-    this.material = new THREE.MeshStandardMaterial({ color: 0x86a2cf });
-    this.cube = new THREE.Mesh(geometry, material);
-    this.scene.add(cube);
 
     // lights
-    this.hemilight = new THREE.HemisphereLight(0xffeeb1, 0x080820, 4);
-    this.scene.add(hemilight);
-  }
+    this.hemilight = new HemisphereLight(0xffeeb1, 0x080820, 4);
+    this.scene.add(this.hemilight);
 
-  onWindowResize() {
-    console.log(this);
-  }
-
-  update() {
-    console.log(this);
+    this.update = () => {
+      requestAnimationFrame(this.update);
+      this.controls.update();
+      this.renderer.render(this.scene, this.camera);
+    };
   }
 }

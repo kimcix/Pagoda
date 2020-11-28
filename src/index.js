@@ -1,31 +1,13 @@
 import SceneManager from './SceneManager';
+import Pagoda from './Objects/Pagoda';
 
 const canvas = document.getElementById('canvas');
 const scene = new SceneManager(canvas);
 
-scene.onWindowResize()
-scene.update()
+scene.update();
 
+const pagoda = new Pagoda('hello');
+const boston = new Pagoda('boston');
 
-bindEventListeners();
-render();
-
-function bindEventListeners() {
-	window.onresize = resizeCanvas;
-	resizeCanvas();	
-}
-
-function resizeCanvas() {
-	canvas.style.width = '100%';
-	canvas.style.height= '100%';
-	
-	canvas.width  = canvas.offsetWidth;
-	canvas.height = canvas.offsetHeight;
-    
-    scene.onWindowResize();
-}
-
-function render() {
-    requestAnimationFrame(render);
-    scene.update();
-}
+pagoda.sayName();
+boston.sayName();
