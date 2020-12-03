@@ -30,8 +30,11 @@ export default class SceneManager {
     this.controls.maxDistance = 500;
     this.controls.maxPolarAngle = (2 * Math.PI) / 3; // Limit to horizon
 
+<<<<<<< HEAD
     this.temple = new Entity('../../temple.gltf', this.scene);
 
+=======
+>>>>>>> 64c22bdc12364f05c20fe6fab79754111c012451
     // lights
     this.hemilight = new HemisphereLight(0xffeeb1, 0x080820, 4);
     this.scene.add(this.hemilight);
